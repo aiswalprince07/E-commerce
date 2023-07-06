@@ -1,14 +1,14 @@
-import { ProductList } from "../features/Product-list/components/ProductList";
-import NavBar from "./Navbar";
+import NavBar from "../features/navbar/Navbar";
+import ProductList from "../features/product/components/ProductList";
 
 function Home() {
-  return (
-    <div>
-      <NavBar>
-        <ProductList></ProductList>
-      </NavBar>
-    </div>
-  );
+    return ( 
+        <div>
+            <NavBar>
+                <ProductList></ProductList>
+            </NavBar>
+        </div>
+     );
 }
 
 export default Home;
