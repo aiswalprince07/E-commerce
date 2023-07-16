@@ -36,6 +36,8 @@ exports.fetchAllProducts = async (req,res) =>{
         query = query.find({brand: req.query.brand});
         totalProductsQuery = totalProductsQuery.find({brand: req.query.brand});
     }
+
+    //TODO: How to get sort on discounted Price not to Actual price
     if(req.query._sort && req.query._order){
         // await query._sort({"title":"desc/ asc"})
         query = query.sort({[req.query._sort]:req.query._order})
@@ -55,6 +57,28 @@ exports.fetchAllProducts = async (req,res) =>{
         const docs = await query.exec();
         res.set('X-Total-Count',totalDocs);// new header set kar sakte (More reference ke liye ...express Doc)
         res.status(200).json(docs);
+    }catch(err){
+        res.status(400).json(err);
+    }
+}
+
+exports.fetchProductById = async (req,res) =>{
+    const {id} = req.params;
+
+    try{
+        const product = await Product.findById(id);
+        res.status(200).json(product);
+    }catch(err){
+        res.status(400).json(err);
+    }
+}
+
+exports.updateProduct = async (req,res) =>{
+    const {id} = req.params;
+
+    try{
+        const product = await Product.findByIdAndUpdate(id,req.body, {new:true});
+        res.status(200).json(product);
     }catch(err){
         res.status(400).json(err);
     }
