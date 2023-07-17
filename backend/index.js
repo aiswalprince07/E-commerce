@@ -9,6 +9,7 @@ const brandsRouter= require('./routes/Brands');
 const usersRouter = require('./routes/Users');
 const authRouter = require('./routes/Auth');
 const cartRouter = require('./routes/Cart');
+const ordersRouter = require('./routes/Order');
 
 
 //middlewares ( jitne bhi route me h unko as a middleware use kiya)
@@ -22,6 +23,7 @@ server.use('/brands',brandsRouter.router);
 server.use('/users',usersRouter.router);
 server.use('/auth',authRouter.router);
 server.use('/cart',cartRouter.router);
+server.use('/orders',ordersRouter.router);
 
 
 
