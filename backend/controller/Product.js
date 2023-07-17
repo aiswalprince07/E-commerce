@@ -23,8 +23,13 @@ exports.fetchAllProducts = async (req,res) =>{
 
     //TODO: we have to try with multiple category and brands after change in front-end
 
-    let query = Product.find({deleted:{$ne:true}});
-    let totalProductsQuery = Product.find({deleted:{$ne:true}}); // count karne ke liye query kar rhe !!
+    let condition = {};
+    if(!req.query.admin){
+        condition.deleted = {$ne:true}
+    }
+
+    let query = Product.find(condition);
+    let totalProductsQuery = Product.find(condition); // count karne ke liye query kar rhe !!
 
     //order ==> category --> brand  --> sort --> pagination
 
