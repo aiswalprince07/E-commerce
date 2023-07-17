@@ -38,7 +38,9 @@ exports.updateCart = async (req, res) => {
         const cart = await Cart.findByIdAndUpdate(id, req.body, {
             new: true,
         })
-        res.status(200).json(cart);
+        // Testing : jab bhi add to cart karte h ...to hm sidha wo doc ko bhej rhe the ...jabki usko populate karke bhjena chahiye tha(jab hm no. of product bada rhe to picuture chali ja rhi thi)
+        const result = await cart.populate('product');
+        res.status(200).json(result);
     } catch (err) {
       res.status(400).json(err);
     }
