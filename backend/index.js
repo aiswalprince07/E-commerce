@@ -1,11 +1,13 @@
 const express = require('express');
 const server = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 const { createProduct } = require('./controller/Product');
 const productsRouter = require('./routes/Products');
 const categoriesRouter = require('./routes/Category');
 const brandsRouter= require('./routes/Brands');
-const cors = require('cors');
+const usersRouter = require('./routes/Users');
+const authRouter = require('./routes/Auth');
 
 
 //middlewares ( jitne bhi route me h unko as a middleware use kiya)
@@ -16,6 +18,8 @@ server.use(express.json()); // to parse req.body
 server.use('/products',productsRouter.router);
 server.use('/categories',categoriesRouter.router);
 server.use('/brands',brandsRouter.router);
+server.use('/users',usersRouter.router);
+server.use('/auth',authRouter.router);
 
 
 
