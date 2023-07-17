@@ -7,7 +7,7 @@ import {
 } from '../features/cart/cartSlice';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { updateUserAsync } from '../features/auth/authSlice';
+import { updateUserAsync } from '../features/user/userSlice';
 import { useState } from 'react';
 import {
   createOrderAsync,
@@ -39,7 +39,7 @@ function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState(null);
 
   const handleQuantity = (e, item) => {
-    dispatch(updateCartAsync({id:item.id, quantity: +e.target.value }));
+    dispatch(updateCartAsync({ id:item.id, quantity: +e.target.value }));
   };
 
   const handleRemove = (e, id) => {
@@ -62,7 +62,7 @@ function Checkout() {
         items,
         totalAmount,
         totalItems,
-        user,
+        user:user.id,
         paymentMethod,
         selectedAddress,
         status: 'pending', // other status can be delivered, received.
@@ -409,9 +409,9 @@ function Checkout() {
                           <div>
                             <div className="flex justify-between text-base font-medium text-gray-900">
                               <h3>
-                                <a href={item.product.href}>{item.product.title}</a>
+                                <a href={item.product.id}>{item.product.title}</a>
                               </h3>
-                              <p className="ml-4">${discountedPrice(item)}</p>
+                              <p className="ml-4">${discountedPrice(item.product)}</p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
                               {item.product.brand}
@@ -426,8 +426,8 @@ function Checkout() {
                                 Qty
                               </label>
                               <select
-                                onChange={(e) => handleQuantity(e, item.product)}
-                                value={item.product.quantity}
+                                onChange={(e) => handleQuantity(e, item)}
+                                value={item.quantity}
                               >
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -439,7 +439,7 @@ function Checkout() {
 
                             <div className="flex">
                               <button
-                                onClick={(e) => handleRemove(e, item.product.id)}
+                                onClick={(e) => handleRemove(e, item.id)}
                                 type="button"
                                 className="font-medium text-indigo-600 hover:text-indigo-500"
                               >

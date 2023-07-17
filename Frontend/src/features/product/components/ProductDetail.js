@@ -57,7 +57,7 @@ export default function ProductDetail() {
     if (items.findIndex((item) => item.product.id === product.id) < 0) {
       console.log({ items, product });
       const newItem = {
-        productId: product.id,
+        product: product.id,
         quantity: 1,
         user: user.id,
       };
