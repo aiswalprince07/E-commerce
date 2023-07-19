@@ -1,4 +1,4 @@
-const passport = require("passport");
+const passport = require('passport');
 
 exports.isAuth = (req, res, done)=>{
     return passport.authenticate('jwt');

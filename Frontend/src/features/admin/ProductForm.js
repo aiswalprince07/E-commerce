@@ -85,12 +85,13 @@ function ProductForm() {
           product.id = params.id;
           product.rating = selectedProduct.rating || 0;
           dispatch(updateProductAsync(product));
-          alert.success('Product Updated Successfully');
+          alert.success('Product Updated');
 
           reset();
         } else {
           dispatch(createProductAsync(product));
-          //TODO: these alerts should check if API failed 
+          alert.success('Product Created');
+          // TODO: these alerts should check if API failed
           reset();
         }
       })}
