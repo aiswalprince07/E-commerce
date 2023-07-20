@@ -23,8 +23,6 @@ const { User } = require('./model/User');
 const { isAuth, sanitizeUser, cookieExtractor } = require('./services/common');
 const path = require('path');
 
-// MONGODB_URL=mongodb+srv://princejee2019:fu1Umc3hfNF7G5u3@cluster0.t1ri7vu.mongodb.net/E-commerce?retryWrites=true&w=majority
-// # cloud database ==> PASSWORD=fu1Umc3hfNF7G5u3
 // console.log(process.env)
 
 // Webhook
@@ -73,7 +71,7 @@ opts.secretOrKey = process.env.JWT_SECRET_KEY; // TODO: should not be in code;
 
 //middlewares ( jitne bhi route me h unko as a middleware use kiya)
 
-server.use(express.static(path.resolve(__dirname,'build')))
+// server.use(express.static(path.resolve(__dirname,'build')))
 server.use(cookieParser());
 server.use(
   session({
@@ -89,7 +87,6 @@ server.use(
   })
 );
 server.use(express.json()); // to parse req.body
-
 server.use('/products', isAuth(), productsRouter.router);
 // we can also use JWT token for client-only auth
 server.use('/categories', isAuth(), categoriesRouter.router);
